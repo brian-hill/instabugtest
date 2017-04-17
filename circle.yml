@@ -11,9 +11,10 @@ machine:
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
 
-post:
-    - ./gradlew assembleDebug
-    - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+test:
+    post:
+        - ./gradlew assembleDebug
+        - cp -r app/build/outputs $CIRCLE_ARTIFACTS
 
 
 cache_directories:
