@@ -1,0 +1,17 @@
+dependencies:
+  pre:
+     # Android SDK Build-tools, revision 25.0.2
+    - if [ ! -d "/usr/local/android-sdk-linux/build-tools/25.0.2" ]; then echo y | android update sdk --no-ui --all --filter "build-tools-25.0.5"; fi
+
+general:
+    artifacts:
+        - /home/ubuntu/citest2/app/build/outputs/apk/
+
+machine:
+    environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
+
+test:
+    override:
+        - ./gradlew assembleDebug
+        - cp -r app/build/outputs $CIRCLE_ARTIFACTS
